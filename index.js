@@ -20,6 +20,14 @@ const client = new MongoClient(uri, {
   },
 });
 
+// all database collections
+const allReviews = client.db('royal-palateDB').collection('reviews');
+
+app.get('/all-reviews', async (req, res) => {
+  const result = await allReviews.find().toArray();
+  res.send(result);
+});
+
 async function run() {
   try {
     // Connect the client to the server	(optional starting in v4.7)
@@ -31,7 +39,7 @@ async function run() {
     );
   } finally {
     // Ensures that the client will close when you finish/error
-    await client.close();
+    // await client.close();
   }
 }
 run().catch(console.dir);

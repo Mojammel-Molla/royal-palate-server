@@ -22,9 +22,14 @@ const client = new MongoClient(uri, {
 
 // all database collections
 const allReviews = client.db('royal-palateDB').collection('reviews');
+const allBlogs = client.db('royal-palateDB').collection('blogs');
 
 app.get('/all-reviews', async (req, res) => {
   const result = await allReviews.find().toArray();
+  res.send(result);
+});
+app.get('/all-blogs', async (req, res) => {
+  const result = await allBlogs.find().toArray();
   res.send(result);
 });
 
